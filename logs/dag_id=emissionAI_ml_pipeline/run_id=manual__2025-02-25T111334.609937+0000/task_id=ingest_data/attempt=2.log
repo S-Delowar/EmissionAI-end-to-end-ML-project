@@ -1,0 +1,22 @@
+[2025-02-25T11:28:07.619+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-02-25T11:28:07.652+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: emissionAI_ml_pipeline.ingest_data manual__2025-02-25T11:13:34.609937+00:00 [queued]>
+[2025-02-25T11:28:07.666+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: emissionAI_ml_pipeline.ingest_data manual__2025-02-25T11:13:34.609937+00:00 [queued]>
+[2025-02-25T11:28:07.668+0000] {taskinstance.py:2867} INFO - Starting attempt 2 of 2
+[2025-02-25T11:28:07.691+0000] {taskinstance.py:2890} INFO - Executing <Task(_PythonDecoratedOperator): ingest_data> on 2025-02-25 11:13:34.609937+00:00
+[2025-02-25T11:28:07.698+0000] {standard_task_runner.py:72} INFO - Started process 207 to run task
+[2025-02-25T11:28:07.704+0000] {standard_task_runner.py:104} INFO - Running: ['airflow', 'tasks', 'run', 'emissionAI_ml_pipeline', 'ingest_data', 'manual__2025-02-25T11:13:34.609937+00:00', '--job-id', '78', '--raw', '--subdir', 'DAGS_FOLDER/ml_pipeline.py', '--cfg-path', '/tmp/tmpz8923nyv']
+[2025-02-25T11:28:07.709+0000] {standard_task_runner.py:105} INFO - Job 78: Subtask ingest_data
+[2025-02-25T11:28:07.773+0000] {task_command.py:467} INFO - Running <TaskInstance: emissionAI_ml_pipeline.ingest_data manual__2025-02-25T11:13:34.609937+00:00 [running]> on host 2131ac4263f9
+[2025-02-25T11:28:07.899+0000] {taskinstance.py:3134} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='emissionAI_ml_pipeline' AIRFLOW_CTX_TASK_ID='ingest_data' AIRFLOW_CTX_EXECUTION_DATE='2025-02-25T11:13:34.609937+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-02-25T11:13:34.609937+00:00'
+[2025-02-25T11:28:07.901+0000] {taskinstance.py:732} INFO - ::endgroup::
+[2025-02-25T11:28:07.914+0000] {logging_mixin.py:190} INFO - host: aws-0-ap-southeast-1.pooler.supabase.com, user: postgres.yksdylbnseqxrbwaxmgz, pass: jtVHoVpDpfxOw0CI, db: postgres, port: 5432
+[2025-02-25T11:28:07.916+0000] {data_ingestion.py:44} INFO - SQLAlchemy engine created successfully.
+[2025-02-25T11:28:07.917+0000] {data_ingestion.py:60} INFO - Executing query to fetch data from table fuel_consumption_1995_2025.
+[2025-02-25T11:28:19.523+0000] {data_ingestion.py:65} INFO - Loaded 28492 records from table.
+[2025-02-25T11:28:19.911+0000] {logging_mixin.py:190} INFO - ingestion task finished
+[2025-02-25T11:28:19.912+0000] {python.py:240} INFO - Done. Returned value was: None
+[2025-02-25T11:28:19.926+0000] {taskinstance.py:341} INFO - ::group::Post task execution logs
+[2025-02-25T11:28:19.928+0000] {taskinstance.py:353} INFO - Marking task as SUCCESS. dag_id=emissionAI_ml_pipeline, task_id=ingest_data, run_id=manual__2025-02-25T11:13:34.609937+00:00, execution_date=20250225T111334, start_date=20250225T112807, end_date=20250225T112819
+[2025-02-25T11:28:20.055+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-02-25T11:28:20.128+0000] {taskinstance.py:3901} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-02-25T11:28:20.134+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

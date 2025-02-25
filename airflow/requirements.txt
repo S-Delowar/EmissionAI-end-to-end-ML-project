@@ -1,1 +1,4 @@
 mlflow
+pandas
+python-dotenv
+SQLAlchemy

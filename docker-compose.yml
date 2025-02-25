@@ -32,6 +32,8 @@ services:
       - ./airflow/dags/:/opt/airflow/dags/
       - ./logs/:/opt/airflow/logs/
       - ./src/:/opt/airflow/src/
+      - ./config/:/opt/airflow/config/
+      - ./artifacts:/opt/airflow/artifacts
     ports:
       - "8080:8080"
     depends_on:
@@ -60,8 +62,8 @@ services:
     image: minio/minio
     container_name: minio
     ports:
-      - "9000:9000"
-      - "9001:9001"
+      - "8900:9000"
+      - "8901:9001"
     environment:
       - MINIO_ROOT_USER=minio
       - MINIO_ROOT_PASSWORD=minio123

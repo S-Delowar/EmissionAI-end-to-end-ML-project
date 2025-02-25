@@ -1,0 +1,11 @@
+mlflow
+pandas
+python-dotenv
+SQLAlchemy
+PyYAML
+ipyk
+scikit-learn
+numpy
+matplotlib
+seaborn
+plotly

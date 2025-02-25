@@ -1,4 +1,7 @@
 .venv
 .env
 artifacts/
+model/
+preprocessor/
 Notebooks/
+custom_logs/

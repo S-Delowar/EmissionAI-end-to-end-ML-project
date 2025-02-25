@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 import sys
 import os
 
-from src.component.data_ingestion import add_nums
+from src.component.data_ingestion import DataIngestion
 import mlflow
 
 
@@ -32,13 +32,15 @@ with DAG(
     
     @task
     def ingest_data():
-        r = add_nums(3,5)
-        mlflow.set_tracking_uri("http://mlflow:5000")
-        mlflow.set_experiment("new_exp")
-        with mlflow.start_run():
-            mlflow.log_metric("result", r)
-        
-        print("hello2")
+        data_ingestion = DataIngestion()
+        data_ingestion.ingest_data_from_pg_db()
+
+
+        # mlflow.set_tracking_uri("http://mlflow:5000")
+        # mlflow.set_experiment("new_exp")
+        # with mlflow.start_run():
+        #     mlflow.log_metric("result", r)
+        print("ingestion task finished")
    
        
     @task
