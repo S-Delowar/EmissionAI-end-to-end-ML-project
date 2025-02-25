@@ -1,0 +1,18 @@
+[2025-02-24T05:07:36.783+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-02-24T05:07:36.809+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: emissionAI_ml_pipeline.preprocessing manual__2025-02-24T05:07:31.502771+00:00 [queued]>
+[2025-02-24T05:07:36.824+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: emissionAI_ml_pipeline.preprocessing manual__2025-02-24T05:07:31.502771+00:00 [queued]>
+[2025-02-24T05:07:36.826+0000] {taskinstance.py:2867} INFO - Starting attempt 1 of 2
+[2025-02-24T05:07:36.845+0000] {taskinstance.py:2890} INFO - Executing <Task(_PythonDecoratedOperator): preprocessing> on 2025-02-24 05:07:31.502771+00:00
+[2025-02-24T05:07:36.850+0000] {standard_task_runner.py:72} INFO - Started process 1514 to run task
+[2025-02-24T05:07:36.854+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'emissionAI_ml_pipeline', 'preprocessing', 'manual__2025-02-24T05:07:31.502771+00:00', '--job-id', '31', '--raw', '--subdir', 'DAGS_FOLDER/ml_pipeline.py', '--cfg-path', '/tmp/tmpecmr82wm']
+[2025-02-24T05:07:36.858+0000] {standard_task_runner.py:105} INFO - Job 31: Subtask preprocessing
+[2025-02-24T05:07:36.920+0000] {task_command.py:467} INFO - Running <TaskInstance: emissionAI_ml_pipeline.preprocessing manual__2025-02-24T05:07:31.502771+00:00 [running]> on host 89dd348b5568
+[2025-02-24T05:07:37.024+0000] {taskinstance.py:3134} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='emissionAI_ml_pipeline' AIRFLOW_CTX_TASK_ID='preprocessing' AIRFLOW_CTX_EXECUTION_DATE='2025-02-24T05:07:31.502771+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-02-24T05:07:31.502771+00:00'
+[2025-02-24T05:07:37.026+0000] {taskinstance.py:732} INFO - ::endgroup::
+[2025-02-24T05:07:37.030+0000] {logging_mixin.py:190} INFO - hello2
+[2025-02-24T05:07:37.031+0000] {python.py:240} INFO - Done. Returned value was: None
+[2025-02-24T05:07:37.042+0000] {taskinstance.py:341} INFO - ::group::Post task execution logs
+[2025-02-24T05:07:37.044+0000] {taskinstance.py:353} INFO - Marking task as SUCCESS. dag_id=emissionAI_ml_pipeline, task_id=preprocessing, run_id=manual__2025-02-24T05:07:31.502771+00:00, execution_date=20250224T050731, start_date=20250224T050736, end_date=20250224T050737
+[2025-02-24T05:07:37.110+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-02-24T05:07:37.147+0000] {taskinstance.py:3901} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-02-24T05:07:37.151+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

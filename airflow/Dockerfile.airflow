@@ -1,0 +1,19 @@
+FROM apache/airflow:2.10.5-python3.9
+
+# Switch to root user to copy files and set permissions
+USER root
+
+# Copy requirements.txt to the container
+COPY requirements.txt /opt/airflow/requirements.txt
+
+# Set permissions for the airflow user
+RUN chown airflow:0 /opt/airflow/
+
+# Switch to the airflow user to install Python packages
+USER airflow
+
+# Upgrade pip and install Python packages from requirements.txt
+RUN pip install --upgrade pip && \
+    pip install --no-cache-dir -r /opt/airflow/requirements.txt \
+      --constraint https://raw.githubusercontent.com/apache/airflow/constraints-2.10.5/constraints-3.9.txt
+

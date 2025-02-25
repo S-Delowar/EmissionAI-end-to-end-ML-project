@@ -1,0 +1,26 @@
+artifacts_root: artifacts 
+
+data_ingestion:
+  root_dir: artifacts/data_ingestion
+
+data_validation:
+  root_dir: artifacts/data_validation
+  input_data_path: artifacts/data_ingestion/raw.csv
+  errors_file_path: artifacts/data_validation/errors.json  
+  dataset_drift_report_filepath: artifacts/data_validation/dataset_drift.json
+  valid_data_path: artifacts/data_validation/valid_data
+
+data_transformation:
+  root_dir: artifacts/data_transformation
+  train_data_path: artifacts/data_validation/valid_data/train.csv
+  test_data_path: artifacts/data_validation/valid_data/test.csv
+  preprocessor_filepath: preprocessor/preprocessor.pkl
+  transformed_data_dir: artifacts/data_transformation/transformed_data
+
+model_trainer:
+  root_dir: artifacts/model_trainer
+  train_data_path: artifacts/data_transformation/transformed_data/train_data.npy
+  test_data_path: artifacts/data_transformation/transformed_data/test_data.npy
+  preprocessor_path: preprocessor/preprocessor.pkl
+  model_save_path: model/best_model.pkl
+  hyperparameter_tuning_report_dir: artifacts/model_trainer

@@ -1,0 +1,89 @@
+
+version: '3.8'
+
+services:
+  airflow:
+    build:
+      context: ./airflow 
+      dockerfile: Dockerfile.airflow
+    restart: always
+    container_name: airflow
+    user: "airflow"
+    command: bash -c "
+              airflow db init &&
+              airflow db upgrade &&
+              airflow users create --username airflow --firstname sahed --lastname delowar \
+              --role Admin --email sd@mail.com --password airflow || echo 'User already exists' &&
+              airflow webserver &
+              sleep 10 &&
+              airflow scheduler
+            "
+    env_file:
+      - .env
+    environment:
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      - AIRFLOW__CORE__FERNET_KEY=LRCTcvXDRU5Fm_Pd1awqk8jc0-9XTb8iTcUEmxi40TQ=
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+      - AIRFLOW__CORE__DAGS_FOLDER=/opt/airflow/dags
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://postgres:postgres123@postgres/postgres_db
+      - PYTHONPATH=/opt/airflow/
+
+    volumes:
+      - ./airflow/dags/:/opt/airflow/dags/
+      - ./logs/:/opt/airflow/logs/
+      - ./src/:/opt/airflow/src/
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+
+
+  mlflow:
+    build: ./mlflow
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./mlruns:/app/mlruns  
+    environment:
+      - MLFLOW_TRACKING_URI=http://localhost:5000
+      - MLFLOW_BACKEND_STORE_URI=postgresql+psycopg2://postgres:postgres123@postgres:5432/mlflow_db
+      - MLFLOW_ARTIFACT_ROOT=s3://mlflow/
+      - AWS_ACCESS_KEY_ID=minio
+      - AWS_SECRET_ACCESS_KEY=minio123
+      - MLFLOW_S3_ENDPOINT_URL=http://minio:9000
+    depends_on:
+      - postgres
+      - minio
+
+
+  minio:
+    image: minio/minio
+    container_name: minio
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      - MINIO_ROOT_USER=minio
+      - MINIO_ROOT_PASSWORD=minio123
+    volumes:
+      - minio_data:/data
+    command: server --console-address ":9001" /data
+
+
+  postgres:
+    image: postgres:13
+    restart: always
+    container_name: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres123
+      POSTGRES_DB: postgres_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./mlflow/init.sql:/docker-entrypoint-initdb.d/init.sql  # Initialize MLflow database
+    ports:
+      - "5432:5432"
+
+volumes:
+  postgres_data:
+  minio_data:
